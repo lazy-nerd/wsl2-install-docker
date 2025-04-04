@@ -14,6 +14,14 @@ sudo apt-get install \
     gnupg \
     lsb-release -y -qq >/dev/null
 
+# remove conflicting packages
+echo "Removing conflicting packages..."
+for pkg in \
+        docker.io docker-doc docker-compose \
+        docker-compose-v2 podman-docker containerd runc; \
+        do sudo apt-get remove $pkg; \
+done  > /dev/null 2>&1
+
 # configure docker repo
 
 
