@@ -35,10 +35,11 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # install packages
+sudo apt-get update -qq
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y -qq
 
-
-# starting docker service
-
+# testing docker service
+sudo docker run hello-world
 
 # OPTIONAL install docker compose plugin
 
