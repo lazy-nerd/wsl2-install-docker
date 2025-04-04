@@ -35,8 +35,8 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # install packages
-sudo apt-get update -qq
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y -qq
+sudo apt-get update -qq >/dev/null
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y -qq >/dev/null
 
 # testing docker service
 echo "Testing if docker service and test container are running..."
@@ -59,6 +59,7 @@ echo 'fi' >> ~/.bashrc
 echo "$localuser ALL=(ALL) NOPASSWD: /usr/bin/dockerd" | sudo EDITOR='tee -a' visudo
 echo "Adding current user to the group..."
 sudo usermod -aG docker $localuser
+sleep 3
 newgrp docker
 
 # final test
