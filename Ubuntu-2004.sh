@@ -39,7 +39,9 @@ sudo apt-get update -qq
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y -qq
 
 # testing docker service
+echo "Testing if docker service and test container are running..."
 sudo docker run hello-world
+sudo docker compose version
 
 # OPTIONAL install docker compose plugin
 
@@ -53,10 +55,12 @@ echo '    sudo dockerd > /dev/null 2>&1 &' >> ~/.bashrc
 echo '    disown' >> ~/.bashrc
 echo 'fi' >> ~/.bashrc
 
-# testing docker service
-
-
 # configure user privileges
+echo "$localuser ALL=(ALL) NOPASSWD: /usr/bin/dockerd" | sudo EDITOR='tee -a' visudo
+echo "Adding current user to the group..."
+sudo usermod -aG docker $localuser
+newgrp docker
 
-
+# final test
+docker ps
 # END
