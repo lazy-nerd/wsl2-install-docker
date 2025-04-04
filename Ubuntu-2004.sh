@@ -45,7 +45,13 @@ sudo docker run hello-world
 
 
 # docker startup script
-
+echo "Adding docker startup script to the current user's .bashrc"
+echo '# Start Docker daemon automatically when logging in if not running.' >> ~/.bashrc
+echo 'RUNNING=`ps aux | grep dockerd | grep -v grep`' >> ~/.bashrc
+echo 'if [ -z "$RUNNING" ]; then' >> ~/.bashrc
+echo '    sudo dockerd > /dev/null 2>&1 &' >> ~/.bashrc
+echo '    disown' >> ~/.bashrc
+echo 'fi' >> ~/.bashrc
 
 # testing docker service
 
