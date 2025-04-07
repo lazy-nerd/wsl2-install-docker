@@ -6,13 +6,14 @@ localuser=$(id -u -n 1000)
 # system update
 printf "Updating system repositories... Please provide user password: "
 
+sudo apt-get update -qq >/dev/null
+
 if [ $? -eq 0 ]; then
     echo OK
 else
     echo FAIL
 fi
 
-sudo apt-get update -qq >/dev/null
 sudo apt-get upgrade -y -qq >/dev/null
 echo "Installing prerequisite packages..."
 sudo apt-get install \
