@@ -36,7 +36,7 @@ else
 fi
 
 # remove conflicting packages
-printf "Removing conflicting packages..."
+printf "Removing conflicting packages...  "
 for pkg in \
         docker.io docker-doc docker-compose \
         docker-compose-v2 podman-docker containerd runc; \
@@ -50,7 +50,7 @@ else
 fi
 
 # configure docker repo
-printf "Importing repository key..."
+printf "Importing repository key...  "
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 
@@ -81,7 +81,7 @@ fi
 
 # testing docker service
 printf "Testing if docker service and test container are running..."
-sudo docker run hello-world >/dev/null
+sudo docker run hello-world >/dev/null 2>&1
 
 if [ $? -eq 0 ]; then
     echo OK
@@ -95,13 +95,13 @@ sudo docker compose version
 
 
 # docker startup script
-echo "Adding docker startup script to the current user's .bashrc"
-echo '# Start Docker daemon automatically when logging in if not running.' >> ~/.bashrc
-echo 'RUNNING=`ps aux | grep dockerd | grep -v grep`' >> ~/.bashrc
-echo 'if [ -z "$RUNNING" ]; then' >> ~/.bashrc
+printf "Adding docker startup script to the current user's .bashrc...  "
+echo '# Start Docker daemon automatically when logging in if not running.' >/dev/null >> ~/.bashrc
+echo 'RUNNING=`ps aux | grep dockerd | grep -v grep`' >/dev/null >> ~/.bashrc
+echo 'if [ -z "$RUNNING" ]; then' >/dev/null >> ~/.bashrc
 echo '    sudo dockerd > /dev/null 2>&1 &' >> ~/.bashrc
-echo '    disown' >> ~/.bashrc
-echo 'fi' >> ~/.bashrc
+echo '    disown' >/dev/null >> ~/.bashrc
+echo 'fi' >/dev/null >> ~/.bashrc
 
 # configure user privileges
 echo "$localuser ALL=(ALL) NOPASSWD: /usr/bin/dockerd" | sudo EDITOR='tee -a' visudo >/dev/null
