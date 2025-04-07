@@ -4,7 +4,12 @@
 localuser=$(id -u -n 1000)
 
 # system update
-printf "Updating system repositories... Please provide user password: "
+
+# dummy sudo to cache a password
+
+sudo ls > /dev/null 2>&1
+
+printf "Updating system repositories... "
 
 sudo apt-get update -qq >/dev/null
 
@@ -14,26 +19,47 @@ else
     echo FAIL
 fi
 
+printf  "Installing prerequisite packages...  "
+
 sudo apt-get upgrade -y -qq >/dev/null
-echo "Installing prerequisite packages..."
+
 sudo apt-get install \
     ca-certificates \
     curl \
     gnupg \
     lsb-release -y -qq >/dev/null
 
+if [ $? -eq 0 ]; then
+    echo OK
+else
+    echo FAIL
+fi
+
 # remove conflicting packages
-echo "Removing conflicting packages..."
+printf "Removing conflicting packages..."
 for pkg in \
         docker.io docker-doc docker-compose \
         docker-compose-v2 podman-docker containerd runc; \
         do sudo apt-get remove $pkg; \
 done  > /dev/null 2>&1
 
+if [ $? -eq 0 ]; then
+    echo OK
+else
+    echo FAIL
+fi
+
 # configure docker repo
-echo "Importing repository key..."
+printf "Importing repository key..."
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+
+if [ $? -eq 0 ]; then
+    echo OK
+else
+    echo FAIL
+fi
+
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 
 ## Add the repository to Apt sources:
@@ -43,12 +69,26 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # install packages
+printf "Install docker packages...  "
 sudo apt-get update -qq >/dev/null
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y -qq >/dev/null
 
+if [ $? -eq 0 ]; then
+    echo OK
+else
+    echo FAIL
+fi
+
 # testing docker service
-echo "Testing if docker service and test container are running..."
-sudo docker run hello-world
+printf "Testing if docker service and test container are running..."
+sudo docker run hello-world >/dev/null
+
+if [ $? -eq 0 ]; then
+    echo OK
+else
+    echo FAIL
+fi
+
 sudo docker compose version
 
 # OPTIONAL install docker compose plugin
