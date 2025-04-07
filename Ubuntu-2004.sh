@@ -105,8 +105,14 @@ echo 'fi' >> ~/.bashrc
 
 # configure user privileges
 echo "$localuser ALL=(ALL) NOPASSWD: /usr/bin/dockerd" | sudo EDITOR='tee -a' visudo >/dev/null
-echo "Adding current user to the group..."
+printf "Adding current user to the group...  "
 sudo usermod -aG docker $localuser
+
+if [ $? -eq 0 ]; then
+    echo OK
+else
+    echo FAIL
+fi
 
 #exec newgrp docker
 
