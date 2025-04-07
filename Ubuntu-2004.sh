@@ -56,7 +56,7 @@ echo '    disown' >> ~/.bashrc
 echo 'fi' >> ~/.bashrc
 
 # configure user privileges
-echo "$localuser ALL=(ALL) NOPASSWD: /usr/bin/dockerd" | sudo EDITOR='tee -a' visudo
+echo "$localuser ALL=(ALL) NOPASSWD: /usr/bin/dockerd" | sudo EDITOR='tee -a' visudo >/dev/null
 echo "Adding current user to the group..."
 sudo usermod -aG docker $localuser
 
