@@ -60,8 +60,8 @@ echo "$localuser ALL=(ALL) NOPASSWD: /usr/bin/dockerd" | sudo EDITOR='tee -a' vi
 echo "Adding current user to the group..."
 sudo usermod -aG docker $localuser
 
-exec newgrp docker
+#exec newgrp docker
 
 # final test
-docker ps
+#docker ps
 # END
