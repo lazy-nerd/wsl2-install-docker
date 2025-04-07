@@ -7,7 +7,7 @@ localuser=$(id -u -n 1000)
 
 # dummy sudo to cache a password
 
-sudo ls > /dev/null 2>&1
+sudo pwd > /dev/null 2>&1
 
 printf "Updating system repositories... "
 
@@ -80,7 +80,7 @@ else
 fi
 
 # testing docker service
-printf "Testing if docker service and test container are running..."
+printf "Testing if docker service and test container are running...  "
 sudo docker run hello-world >/dev/null 2>&1
 
 if [ $? -eq 0 ]; then
@@ -91,9 +91,6 @@ fi
 
 sudo docker compose version
 
-# OPTIONAL install docker compose plugin
-
-
 # docker startup script
 printf "Adding docker startup script to the current user's .bashrc...  "
 echo '# Start Docker daemon automatically when logging in if not running.' >/dev/null >> ~/.bashrc
@@ -102,6 +99,12 @@ echo 'if [ -z "$RUNNING" ]; then' >/dev/null >> ~/.bashrc
 echo '    sudo dockerd > /dev/null 2>&1 &' >> ~/.bashrc
 echo '    disown' >/dev/null >> ~/.bashrc
 echo 'fi' >/dev/null >> ~/.bashrc
+
+if [ $? -eq 0 ]; then
+    echo OK
+else
+    echo FAIL
+fi
 
 # configure user privileges
 echo "$localuser ALL=(ALL) NOPASSWD: /usr/bin/dockerd" | sudo EDITOR='tee -a' visudo >/dev/null
