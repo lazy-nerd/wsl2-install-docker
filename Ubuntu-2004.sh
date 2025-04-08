@@ -30,12 +30,12 @@ else
 fi
 
 #printf  "Installing prerequisite packages...  "
-sudo apt-get upgrade -y -qq >/dev/null
+sudo apt-get upgrade -y -qq >/dev/null 2>>err.log
 sudo apt-get install \
     ca-certificates \
     curl \
     gnupg \
-    lsb-release -y -qq >/dev/null
+    lsb-release -y -qq >/dev/null 2>>err.log
 is_ok
 
 # remove conflicting packages
