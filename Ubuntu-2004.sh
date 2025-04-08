@@ -72,7 +72,10 @@ printf "Testing if docker service and test container are running...  "
 sudo docker run hello-world >/dev/null 2>>err.log
 is_ok
 
+# checking docker compose
+printf "Checking docker compose plugin"
 sudo docker compose version
+is_ok
 
 # docker startup script
 printf "Adding docker startup script to the current user's .bashrc...  "
