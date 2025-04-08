@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
-# parameters
+# parameters & functions
+
+is_ok () {
+  if [ $? -eq 0 ]; then
+    echo OK
+else
+    echo FAIL
+fi
+}
 
 localuser=$(id -u -n 1000)
 
