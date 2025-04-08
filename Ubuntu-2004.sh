@@ -63,8 +63,8 @@ echo \
 
 # install packages
 printf "Install docker packages...  "
-sudo apt-get update -qq >/dev/null
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y -qq >/dev/null
+sudo apt-get update -qq >/dev/null 2>>err.log
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y -qq >/dev/null 2>>err.log
 is_ok
 
 # testing docker service

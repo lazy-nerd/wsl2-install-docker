@@ -3,7 +3,7 @@
 What's the difference?
 
  - add user to docker group
- - startup script in .bashrs if dockerd is not running upon login
+ - startup script in .bashrс if dockerd is not running upon login
  - ...more in the future...
 
 ⚠️ This script is still under construction 🚧
@@ -13,4 +13,4 @@ What's the difference?
 ```shell
 curl -fsSL https://raw.githubusercontent.com/lazy-nerd/wsl2-install-docker/refs/heads/main/Ubuntu-2004.sh -o docker.sh; bash docker.sh
 ```
-For error logs refer to err.log file
+For error logs refer to the err.log file
