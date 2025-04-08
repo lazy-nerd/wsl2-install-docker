@@ -5,7 +5,7 @@
 is_ok () {
   if [ $? -eq 0 ]; then
     echo OK
-else
+  else
     echo FAIL
 fi
 }
@@ -20,7 +20,16 @@ printf "Updating system repositories... "
 sudo apt-get update -qq >/dev/null
 is_ok
 
-printf  "Installing prerequisite packages...  "
+# is apt busy?
+
+if lsof /var/lib/dpkg/lock-frontend >/dev/null 2>&1 || pgrep -x dpkg >/dev/null || pgrep -x apt >/dev/null; then
+    echo "Apt package is busy. Try again later. Exiting" | tee >>err.log
+    exit 1
+else
+    printf  "Installing prerequisite packages...  "
+fi
+
+#printf  "Installing prerequisite packages...  "
 sudo apt-get upgrade -y -qq >/dev/null
 sudo apt-get install \
     ca-certificates \
