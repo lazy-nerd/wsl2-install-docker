@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # parameters & functions
 
+# check if the last command was successful
 is_ok () {
   if [ $? -eq 0 ]; then
     echo OK
@@ -11,21 +12,16 @@ fi
 
 localuser=$(id -u -n 1000)
 
-# system update
-
 # dummy sudo to cache a password
-
 sudo pwd > /dev/null 2>&1
 
+# system update and dependencies installation
 printf "Updating system repositories... "
-
 sudo apt-get update -qq >/dev/null
 is_ok
 
 printf  "Installing prerequisite packages...  "
-
 sudo apt-get upgrade -y -qq >/dev/null
-
 sudo apt-get install \
     ca-certificates \
     curl \
