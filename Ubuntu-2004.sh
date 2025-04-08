@@ -13,7 +13,7 @@ fi
 localuser=$(id -u -n 1000)
 
 # dummy sudo to cache a password
-sudo pwd > /dev/null 2>&1
+sudo pwd > /dev/null 2>>err.log
 
 # system update and dependencies installation
 printf "Updating system repositories... "
@@ -35,7 +35,7 @@ for pkg in \
         docker.io docker-doc docker-compose \
         docker-compose-v2 podman-docker containerd runc; \
         do sudo apt-get remove $pkg; \
-done  > /dev/null 2>&1
+done  > /dev/null 2>>err.log
 is_ok
 
 # configure docker repo
@@ -60,7 +60,7 @@ is_ok
 
 # testing docker service
 printf "Testing if docker service and test container are running...  "
-sudo docker run hello-world >/dev/null 2>&1
+sudo docker run hello-world >/dev/null 2>>err.log
 is_ok
 
 sudo docker compose version
@@ -70,7 +70,7 @@ printf "Adding docker startup script to the current user's .bashrc...  "
 echo '# Start Docker daemon automatically when logging in if not running.' >/dev/null >> ~/.bashrc
 echo 'RUNNING=`ps aux | grep dockerd | grep -v grep`' >/dev/null >> ~/.bashrc
 echo 'if [ -z "$RUNNING" ]; then' >/dev/null >> ~/.bashrc
-echo '    sudo dockerd > /dev/null 2>&1 &' >> ~/.bashrc
+echo '    sudo dockerd > /dev/null 2>>err.log &' >> ~/.bashrc
 echo '    disown' >/dev/null >> ~/.bashrc
 echo 'fi' >/dev/null >> ~/.bashrc
 is_ok
