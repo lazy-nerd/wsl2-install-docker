@@ -23,7 +23,7 @@ is_ok
 # is apt busy?
 
 if lsof /var/lib/dpkg/lock-frontend >/dev/null 2>&1 || pgrep -x dpkg >/dev/null || pgrep -x apt >/dev/null; then
-    echo "Apt package is busy. Try again later. Exiting" | tee >>err.log
+    echo "Apt package is busy. Try again later. Exiting" 2>&1 | tee err.log
     exit 1
 else
     printf  "Installing prerequisite packages...  "
