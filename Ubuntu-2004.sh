@@ -73,8 +73,8 @@ sudo docker run hello-world >/dev/null 2>>err.log
 is_ok
 
 # checking docker compose
-printf "Checking docker compose plugin"
-sudo docker compose version
+printf "Checking docker compose plugin... "
+sudo docker compose version >/dev/null 2>>err.log
 is_ok
 
 # docker startup script
