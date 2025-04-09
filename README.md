@@ -8,12 +8,16 @@ What's the difference?
 
 ⚠️ This script is still under construction 🚧
 
-#### Install on Ubuntu only
+### Prerequisites and Recommendations
 
-Tested on the following distributions:
+It is recommended to use the latest versions of distributions. Mostly tested on the following distributions:
 - Ubuntu 20.04.6
 - Ubuntu 22.04.5
 - Ubuntu 24.04.2
+
+It is also recommended to use the latest version of WSL2. The system can be updated by running `wsl --update` command
+
+### Install script
 
 ```shell
 curl -fsSL https://raw.githubusercontent.com/lazy-nerd/wsl2-install-docker/refs/heads/main/ubuntu-setup.sh -o docker.sh; bash docker.sh
