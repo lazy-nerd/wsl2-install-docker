@@ -10,6 +10,15 @@ is_ok () {
 fi
 }
 
+apt_is_busy () {
+  if lsof /var/lib/dpkg/lock-frontend >/dev/null 2>&1 || pgrep -x dpkg >/dev/null || pgrep -x apt >/dev/null; then
+    echo "Apt package is busy. Try again later. Exiting" 2>&1 | tee err.log
+    exit 1
+  else
+    printf  "Installing prerequisite packages...  "
+fi
+}
+
 localuser=$(id -u -n 1000)
 
 # dummy sudo to cache a password
