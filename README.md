@@ -11,6 +11,6 @@ What's the difference?
 #### Install on Ubuntu 20.04 & 22.04
 
 ```shell
-curl -fsSL https://raw.githubusercontent.com/lazy-nerd/wsl2-install-docker/refs/heads/main/Ubuntu-2004.sh -o docker.sh; bash docker.sh
+curl -fsSL https://raw.githubusercontent.com/lazy-nerd/wsl2-install-docker/refs/heads/main/ubuntu-setup.sh -o docker.sh; bash docker.sh
 ```
 For error logs refer to the err.log file
