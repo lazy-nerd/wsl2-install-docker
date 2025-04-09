@@ -33,6 +33,7 @@ is_ok
 
 #printf  "Installing prerequisite packages...  "
 printf "Upgrading system packages... "
+apt_is_busy
 sudo apt-get upgrade -y -qq >/dev/null 2>>err.log
 sudo apt-get install \
     ca-certificates \
