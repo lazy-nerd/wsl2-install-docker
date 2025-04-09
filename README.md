@@ -8,7 +8,12 @@ What's the difference?
 
 ⚠️ This script is still under construction 🚧
 
-#### Install on Ubuntu 20.04 & 22.04
+#### Install on Ubuntu
+
+Tested on the following distributions:
+- Ubuntu 20.04.6
+- Ubuntu 22.04.5
+- Ubuntu 24.04.2
 
 ```shell
 curl -fsSL https://raw.githubusercontent.com/lazy-nerd/wsl2-install-docker/refs/heads/main/ubuntu-setup.sh -o docker.sh; bash docker.sh
