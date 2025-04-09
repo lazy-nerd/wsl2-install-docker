@@ -99,7 +99,7 @@ sudo usermod -aG docker $localuser
 is_ok
 
 #exec newgrp docker
-
+printf "The installation has been completed!\nPlease relogin to use docker"
 # final test
 #docker ps
-# END
+# --- END ---
