@@ -7,16 +7,17 @@ is_ok () {
     echo OK
   else
     echo FAIL
-fi
+  fi
 }
 
+# check if apt is busy
 apt_is_busy () {
   if lsof /var/lib/dpkg/lock-frontend >/dev/null 2>&1 || pgrep -x dpkg >/dev/null || pgrep -x apt >/dev/null; then
     echo "Apt package is busy. Try again later. Exiting" 2>&1 | tee err.log
     exit 1
   else
-    printf  "Installing prerequisite packages...  "
-fi
+    printf  "..."
+ fi
 }
 
 localuser=$(id -u -n 1000)
@@ -26,17 +27,9 @@ sudo pwd > /dev/null 2>>err.log
 
 # system update and dependencies installation
 printf "Updating system repositories... "
+apt_is_busy
 sudo apt-get update -qq >/dev/null
 is_ok
-
-# is apt busy?
-
-if lsof /var/lib/dpkg/lock-frontend >/dev/null 2>&1 || pgrep -x dpkg >/dev/null || pgrep -x apt >/dev/null; then
-    echo "Apt package is busy. Try again later. Exiting" 2>&1 | tee err.log
-    exit 1
-else
-    printf  "Installing prerequisite packages...  "
-fi
 
 #printf  "Installing prerequisite packages...  "
 sudo apt-get upgrade -y -qq >/dev/null 2>>err.log
@@ -49,6 +42,7 @@ is_ok
 
 # remove conflicting packages
 printf "Removing conflicting packages...  "
+apt_is_busy
 for pkg in \
         docker.io docker-doc docker-compose \
         docker-compose-v2 podman-docker containerd runc; \
@@ -72,6 +66,7 @@ echo \
 
 # Install packages
 printf "Installing docker packages...  "
+apt_is_busy
 sudo apt-get update -qq >/dev/null 2>>err.log
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y -qq >/dev/null 2>>err.log
 is_ok
