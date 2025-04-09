@@ -16,7 +16,7 @@ apt_is_busy () {
     echo "Apt package is busy. Try again later. Exiting" 2>&1 | tee err.log
     exit 1
   else
-    printf  "..."
+    printf  "... "
  fi
 }
 
@@ -32,6 +32,7 @@ sudo apt-get update -qq >/dev/null
 is_ok
 
 #printf  "Installing prerequisite packages...  "
+printf "Upgrading system packages... "
 sudo apt-get upgrade -y -qq >/dev/null 2>>err.log
 sudo apt-get install \
     ca-certificates \
