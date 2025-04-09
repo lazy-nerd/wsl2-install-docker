@@ -8,7 +8,7 @@ What's the difference?
 
 ⚠️ This script is still under construction 🚧
 
-#### Install on Ubuntu
+#### Install on Ubuntu only
 
 Tested on the following distributions:
 - Ubuntu 20.04.6
