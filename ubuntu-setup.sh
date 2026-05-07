@@ -61,10 +61,11 @@ is_ok
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 
 ## Add the repository to Apt sources:
-#echo \
-#  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-#  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
-#  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo -e \
+"Types: deb\nURIs: https://download.docker.com/linux/ubuntu\n\
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")\n\
+Components: stable\nArchitectures: $(dpkg --print-architecture)\nSigned-By: /etc/apt/keyrings/docker.asc" | \
+sudo tee /etc/apt/sources.list.d/docker.sources > /dev/null
 
 sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
 Types: deb
