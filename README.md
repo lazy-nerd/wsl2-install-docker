@@ -4,9 +4,8 @@ What's the difference?
 
  - add user to docker group
  - startup script in .bashrс if dockerd is not running upon login
- - ...more in the future...
 
-⚠️ This script is still under construction 🚧
+⚠️ This script is not meant for use in production 🚧
 
 ### Prerequisites and Recommendations
 
@@ -14,6 +13,7 @@ It is recommended to use the latest versions of distributions. Mostly tested on 
 - Ubuntu 20.04.6
 - Ubuntu 22.04.5
 - Ubuntu 24.04.2
+- Ubuntu 26.04
 
 It is also recommended to use the latest version of WSL2. The system can be updated by running `wsl --update` command
 
