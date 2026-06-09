@@ -64,7 +64,7 @@ sudo chmod a+r /etc/apt/keyrings/docker.asc
 echo -e \
 "Types: deb\nURIs: https://download.docker.com/linux/ubuntu\n\
 Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")\n\
-Components: stable\nArchitectures: $(dpkg --print-architecture)\nSigned-By: /etc/apt/keyrings/docker.asc" > /dev/null | \
+Components: stable\nArchitectures: $(dpkg --print-architecture)\nSigned-By: /etc/apt/keyrings/docker.asc" | \
 sudo tee /etc/apt/sources.list.d/docker.sources > /dev/null
 
 # Install packages
