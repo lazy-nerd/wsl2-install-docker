@@ -5,11 +5,11 @@ What's the difference?
  - add user to docker group
  - startup script in .bashrс if dockerd is not running upon login
 
-⚠️ This script is not meant for use in production 🚧
+⚠️ Use this script whenever the recommended option (Docker Desktop) i not an option
 
 ### Prerequisites and Recommendations
 
-It is recommended to use the latest versions of distributions. Mostly tested on the following distributions:
+It is recommended to use the latest distribution versions. Mostly tested on the following distributions:
 - Ubuntu 20.04.6
 - Ubuntu 22.04.5
 - Ubuntu 24.04.2
